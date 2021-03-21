@@ -32,4 +32,6 @@ public interface Radnja {
 	 */
 	LinkedList<AutoGuma> pronadjiGumu (String markaModel);
 	
+	
+	LinkedList<AutoGuma> vratiSveGume();
 }

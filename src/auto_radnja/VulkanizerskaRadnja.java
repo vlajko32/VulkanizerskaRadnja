@@ -36,4 +36,8 @@ public class VulkanizerskaRadnja implements Radnja {
 		return novaLista;
 	}
 	
+	@Override
+	public LinkedList<AutoGuma> vratiSveGume() {
+		return gume;
+	}
 }
