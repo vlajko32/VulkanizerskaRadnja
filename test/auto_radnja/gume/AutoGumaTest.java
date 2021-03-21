@@ -28,18 +28,18 @@ class AutoGumaTest {
 	@Test
 	@DisplayName("Testira rad konstruktora sa parametrima")
 	void testAutoGumaStringIntIntInt() {
-		a = new AutoGuma("modelMarka",15,150,50);
+		a = new AutoGuma("GoodYear",15,150,50);
 		assertNotNull(a);
 		assertEquals(15,a.getPrecnik());
-		assertEquals("modelMarka",a.getMarkaModel());
+		assertEquals("GoodYear",a.getMarkaModel());
 		assertEquals(150,a.getSirina());
 		assertEquals(50,a.getVisina());
 	}
 
 	@Test
 	void testSetMarkaModel() {
-		a.setMarkaModel("markaModel");
-		assertEquals("markaModel",a.getMarkaModel());
+		a.setMarkaModel("GoodYear");
+		assertEquals("GoodYear",a.getMarkaModel());
 	}
 	
 	@Test
@@ -59,72 +59,126 @@ class AutoGumaTest {
 	
 	@ParameterizedTest
 	@CsvSource({
+		"13",
 		"15",
-		"5",
-		"25"
+		"22"
 	})
 	void testSetPrecnik(int pr) {
-		if(pr<13)
-		{
-			assertThrows(java.lang.RuntimeException.class, ()->a.setPrecnik(pr));
-		}
-		else if(pr>22) {
-			assertThrows(java.lang.RuntimeException.class, ()->a.setPrecnik(pr));
-		}else{
+		
 		a.setPrecnik(pr);
 		assertEquals(pr,a.getPrecnik());
-		}
+	}
+
+	
+	@ParameterizedTest
+	@CsvSource({
+		"50",
+		"40",
+		"23"
+	})
+	void testSetPrecnikVeciOdDozvoljenog(int pr) {
+		
+	assertThrows(java.lang.RuntimeException.class, ()->a.setPrecnik(pr));
+		
 	}
 	
+	@ParameterizedTest
+	@CsvSource({
+		"7",
+		"5",
+		"11"
+	})
+	void testSetPrecnikManjiOdDozvoljenog(int pr) {
+		
+	assertThrows(java.lang.RuntimeException.class, ()->a.setPrecnik(pr));
+		
+	}
 	
+	@ParameterizedTest
+	@CsvSource({
+		"150",
+		"180",
+		"220"
+	})
+	void testSetSirina(int pr) {
+		
+		a.setSirina(pr);
+		assertEquals(pr,a.getSirina());
+		
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"400",
+		"500",
+		"620"
+	})
+	void testSetSirinaVecaOdDozvoljene(int pr) {
+		
+		assertThrows(java.lang.RuntimeException.class, ()->a.setSirina(pr));
+		
+	}
 	
 	@ParameterizedTest
 	@CsvSource({
 		"15",
-		"180",
-		"450"
+		"18",
+		"45"
 	})
-	void testSetSirina(int pr) {
-		if(pr<135)
-		{
-			assertThrows(java.lang.RuntimeException.class, ()->a.setSirina(pr));
-		}
-		else if(pr>355) {
-			assertThrows(java.lang.RuntimeException.class, ()->a.setSirina(pr));
-		}else {
-		a.setSirina(pr);
-		assertEquals(pr,a.getSirina());
-		}
+	void testSetSirinaManjaOdDozvoljene(int pr) {
+		
+		assertThrows(java.lang.RuntimeException.class, ()->a.setSirina(pr));
+		
 	}
+
 
 	@ParameterizedTest
 	@CsvSource({
 		"50",
-		"5",
-		"120"
+		"35",
+		"75"
 	})
 	void testSetVisina(int pr) {
-		if(pr<25)
-		{
-			assertThrows(java.lang.RuntimeException.class, () -> a.setVisina(pr) );
-		}
-		else if(pr>95) {
-			assertThrows(java.lang.RuntimeException.class, () ->a.setVisina(pr) );
-		}else {
+		
 		a.setVisina(pr);
 		assertEquals(pr,a.getVisina());
-		}
+		
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+		"12",
+		"5",
+		"10"
+	})
+	void testSetVisinaManjaOdDozvoljene(int pr) {
+		
+		assertThrows(java.lang.RuntimeException.class, () ->a.setVisina(pr) );
+		
+	}
+	
+	
+	@ParameterizedTest
+	@CsvSource({
+		"110",
+		"130",
+		"120"
+	})
+	void testSetVisinaVecaOdDozvoljene(int pr) {
+		
+		assertThrows(java.lang.RuntimeException.class, () ->a.setVisina(pr) );
+		
 	}
 
 	@Test
 	void testToString() {
-		a.setMarkaModel("markaModel");
+		a.setMarkaModel("GoodYear");
 		a.setPrecnik(18);
 		a.setSirina(200);
 		a.setVisina(50);
 		
 		String str = a.toString();
-		assertTrue(str.contains("marka"));
+		assertTrue(str.contains("GoodYear"));
 		assertTrue(str.contains("18"));
 		assertTrue(str.contains("200"));
 		assertTrue(str.contains("50"));
@@ -132,10 +186,10 @@ class AutoGumaTest {
 
 	@ParameterizedTest
 	@CsvSource({
-		"markaModel,18,200,50,markaModel,18,200,50,true",
-		"markaModel,18,250,60,markaModel,18,200,50,false",
-		"markaModel,19,250,60,markaModel,18,250,50,false",
-		"markaModl,18,200,60,markaModel,18,200,50,false"
+		"GoodYear 12,18,200,50,GoodYear 12,18,200,50,true",
+		"GoodYear 12,18,250,60,GoodYear 12,18,200,50,false",
+		"GoodYear 12,19,250,60,GoodYear 12,18,250,50,false",
+		"GoodYear 12,18,200,60,GoodYear 11,18,200,50,false"
 	})
 	void testEqualsObject(String st1,int pr1,int s1, int v1, String st2,int pr2, int s2, int v2, boolean eq) {
 		a = new AutoGuma(st1, pr1, s1, v1);
