@@ -2,10 +2,20 @@ package auto_radnja;
 
 import java.util.LinkedList;
 import auto_radnja.gume.AutoGuma;
-
+/**
+ * Klasa koja implementira interfejs Radnja
+ * 
+ * @author vlajko32
+ * @version 0.2
+ */
 public class VulkanizerskaRadnja implements Radnja {
+	
+	/**
+	 * Privatni atribut gume kao lista AutoGuma, koja se odmah i inicijalizuje.
+	 */
 	private LinkedList<AutoGuma> gume =
 			new LinkedList<AutoGuma>();
+	
 	@Override
 	public void dodajGumu(AutoGuma a) {
 		if (a == null)
